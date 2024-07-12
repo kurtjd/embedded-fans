@@ -32,11 +32,6 @@
 //! }
 //!
 //! impl Fan for MyFan {
-//!     fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error> {
-//!         // ...
-//!         Ok(rpm)
-//!     }
-//!
 //!     fn max_rpm(&self) -> u16 {
 //!         3150
 //!     }
@@ -47,6 +42,11 @@
 //!
 //!     fn min_start_rpm(&self) -> u16 {
 //!         1120
+//!     }
+//!
+//!     fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error> {
+//!         // ...
+//!         Ok(rpm)
 //!     }
 //! }
 //!
@@ -136,10 +136,6 @@ impl Error for core::convert::Infallible {
 
 /// Blocking fan methods
 pub trait Fan: ErrorType {
-    /// Sets the fan's speed in terms of absolute RPM.
-    /// Returns the actual RPM set on success.
-    fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error>;
-
     /// Returns the maximum RPM the fan is capable of running at.
     fn max_rpm(&self) -> u16;
 
@@ -149,6 +145,10 @@ pub trait Fan: ErrorType {
     /// Returns the minimum RPM needed for the fan to begin running from a dead stop
     /// (which may be the same as the minimum running speed).
     fn min_start_rpm(&self) -> u16;
+
+    /// Sets the fan's speed in terms of absolute RPM.
+    /// Returns the actual RPM set on success.
+    fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error>;
 
     /// Sets the fan's speed in terms of percent of maximum RPM.
     /// Returns the actual RPM set on success.
@@ -175,11 +175,6 @@ pub trait Fan: ErrorType {
 
 impl<T: Fan + ?Sized> Fan for &mut T {
     #[inline]
-    fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error> {
-        T::set_speed_rpm(self, rpm)
-    }
-
-    #[inline]
     fn max_rpm(&self) -> u16 {
         T::max_rpm(self)
     }
@@ -192,6 +187,11 @@ impl<T: Fan + ?Sized> Fan for &mut T {
     #[inline]
     fn min_start_rpm(&self) -> u16 {
         T::min_start_rpm(self)
+    }
+
+    #[inline]
+    fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error> {
+        T::set_speed_rpm(self, rpm)
     }
 
     #[inline]
