@@ -1,3 +1,6 @@
 [workspace]
 resolver = "2"
 members = ["embedded-fans", "embedded-fans-async"]
+
+[patch.crates-io]
+embedded-fans = { path = "embedded-fans" }
