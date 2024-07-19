@@ -1,5 +1,5 @@
 [package]
-authors = ["Microsoft"]
+authors = ["Kurtis Dinelle <t-kudinelle@microsoft.com>"]
 categories = ["embedded", "no-std", "hardware-support"]
 edition = "2021"
 rust-version = "1.79"
@@ -11,8 +11,8 @@ repository = "https://github.com/pop-project/embedded-fans"
 version = "0.1.0"
 
 [features]
-defmt = ["dep:defmt"]
+defmt = ["dep:defmt", "embedded-fans/defmt"]
 
 [dependencies]
-embedded-fans = { version = "0.1.0", path = "../embedded-fans" }
+embedded-fans = "0.1.0"
 defmt = { package = "defmt", version = "0.3.7", optional = true }

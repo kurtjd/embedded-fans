@@ -20,7 +20,7 @@
 //! }
 //!
 //! impl embedded_fans_async::Error for Error {
-//!     fn kind(&self) -> ErrorKind {
+//!     fn kind(&self) -> embedded_fans::ErrorKind {
 //!         match *self {
 //!             // ...
 //!         }
@@ -59,7 +59,8 @@
 //! ```
 
 #![doc = include_str!("../README.md")]
-#![warn(missing_docs)]
+#![forbid(missing_docs)]
+#![forbid(unsafe_code)]
 #![no_std]
 #![allow(async_fn_in_trait)]
 
