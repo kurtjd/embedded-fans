@@ -87,7 +87,9 @@ pub trait Fan: ErrorType {
     #[inline]
     async fn set_speed_percent(&mut self, percent: u8) -> Result<u16, Self::Error> {
         debug_assert!((0..=100).contains(&percent));
-        self.set_speed_rpm((self.max_rpm() * u16::from(percent)) / 100)
+
+        // Cast operands to u32 to prevent overflow during multiplication
+        self.set_speed_rpm(((u32::from(self.max_rpm()) * u32::from(percent)) / 100) as u16)
             .await
     }
 
