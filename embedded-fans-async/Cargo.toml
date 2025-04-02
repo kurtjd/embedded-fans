@@ -15,4 +15,4 @@ defmt = ["dep:defmt", "embedded-fans/defmt"]
 
 [dependencies]
 embedded-fans = "0.1.0"
-defmt = { package = "defmt", version = "0.3.7", optional = true }
+defmt = { package = "defmt", version = "1.0.1", optional = true }
