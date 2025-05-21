@@ -1,6 +1,7 @@
 [package]
 authors = ["Kurtis Dinelle <kdinelle@microsoft.com>"]
 categories = ["embedded", "no-std", "hardware-support"]
+description = "A HAL for various fans (async)"
 edition = "2021"
 rust-version = "1.79"
 keywords = ["hal", "fans"]
