@@ -100,6 +100,13 @@ pub trait Fan: ErrorType {
         Ok(())
     }
 
+    /// Starts the fan at its minimum RPM needed to begin from a dead stop.
+    #[inline]
+    async fn start(&mut self) -> Result<(), Self::Error> {
+        self.set_speed_rpm(self.min_start_rpm()).await?;
+        Ok(())
+    }
+
     /// Stops the fan completely.
     #[inline]
     async fn stop(&mut self) -> Result<(), Self::Error> {
