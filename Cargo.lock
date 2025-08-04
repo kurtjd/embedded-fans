@@ -43,16 +43,25 @@ dependencies = [
 [[package]]
 name = "embedded-fans"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e5007eb97aabfe3606c0b02823b3120e861c748ed3560756aa4fd231ef9ebf0"
+dependencies = [
+ "defmt",
+]
+
+[[package]]
+name = "embedded-fans"
+version = "0.2.0"
 dependencies = [
  "defmt",
 ]
 
 [[package]]
 name = "embedded-fans-async"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "defmt",
- "embedded-fans",
+ "embedded-fans 0.1.0",
 ]
 
 [[package]]
