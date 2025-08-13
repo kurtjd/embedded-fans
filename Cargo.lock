@@ -51,14 +51,14 @@ dependencies = [
 
 [[package]]
 name = "embedded-fans"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "defmt",
 ]
 
 [[package]]
 name = "embedded-fans-async"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "defmt",
  "embedded-fans 0.1.0",

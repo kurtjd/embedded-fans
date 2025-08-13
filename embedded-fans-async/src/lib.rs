@@ -46,6 +46,7 @@
 //!
 //!     async fn set_speed_rpm(&mut self, rpm: u16) -> Result<u16, Self::Error> {
 //!         // ...
+//!         // Store requested rpm...
 //!         Ok(rpm)
 //!     }
 //! }
@@ -54,6 +55,11 @@
 //!     async fn rpm(&mut self) -> Result<u16, Self::Error> {
 //!         // ...
 //!         Ok(42)
+//!     }
+//!
+//!     fn requested_rpm(&self) -> u16 {
+//!         // Retrieve last requested rpm...
+//!         42
 //!     }
 //! }
 //! ```
@@ -156,11 +162,19 @@ impl<T: Fan + ?Sized> Fan for &mut T {
 pub trait RpmSense: ErrorType {
     /// Returns the fan's currently measured RPM.
     async fn rpm(&mut self) -> Result<u16, Self::Error>;
+
+    /// Returns the fan's last requested set RPM.
+    fn requested_rpm(&self) -> u16;
 }
 
 impl<T: RpmSense + ?Sized> RpmSense for &mut T {
     #[inline]
     async fn rpm(&mut self) -> Result<u16, Self::Error> {
         T::rpm(self).await
+    }
+
+    #[inline]
+    fn requested_rpm(&self) -> u16 {
+        T::requested_rpm(self)
     }
 }
